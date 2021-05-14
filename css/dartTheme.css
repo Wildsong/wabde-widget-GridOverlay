@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.grid-overlay-setting .grid-overlay-setting-style th {
+.grid-overlay-setting .esriCTColumnTitle {
   font-size: 12px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .grid-overlay-setting .grid-overlay-setting-color-picker {
-  width: 60px;
+  width: 70%;
   height: 30px;
 }
 
@@ -44,10 +44,18 @@
 }
 
 .grid-overlay-setting .dijitTextBox {
-  width: 60px;
+  width: 70%;
   margin: 0 2px;
 }
 
 .grid-overlay-setting .jimu-ellipsis {
   white-space: normal;
+}
+
+.jimu-rtl .grid-overlay-setting .esriCTDartThemePadding {
+  padding-left: 10px;
+}
+
+ .grid-overlay-setting .esriCTDartThemePadding {
+  padding-right: 10px;
 }

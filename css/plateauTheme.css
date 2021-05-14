@@ -1,5 +1,5 @@
 .grid-overlay-setting .grid-overlay-setting-color-picker {
-  width: 60px;
+  width: 70%;
   height: 30px;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .grid-overlay-setting .dijitTextBox {
-  width: 60px;
+  width: 70%;
   margin: 0 2px;
 }
 
