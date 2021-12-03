@@ -1,4 +1,4 @@
-﻿/*global define*/
+/*global define*/
 define({
   root: ({
     _widgetLabel: "Grid Overlay", // widget label shown on the choose widget dialog and widget panel title

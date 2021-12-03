@@ -292,6 +292,7 @@ define([
         } else {
           //WAB will get config object through this method
           this.config = this.sampleGrid.getSettings();
+          window.localStorage.setItem("storedGridSettings", JSON.stringify(this.config));
           return this.config;
         }
       },

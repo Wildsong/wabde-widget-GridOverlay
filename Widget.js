@@ -100,7 +100,6 @@ define([
     },
 
     onClose: function () {
-      this.gridSetting._saveConfig();
       if (!this.gridSetting.getConfig().enableGridOnClose) {
         this.gridSetting.gridOverlayCtrl.disable();
       }

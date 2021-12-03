@@ -114,6 +114,7 @@ define([
       config: null,
       nls: null,
       gridOverlayCtrl: null,
+      updateInLocalStorage: false,
 
       constructor: function (options) {
         this.map = options.map;
@@ -127,8 +128,8 @@ define([
       },
 
       postCreate: function () {
+        this.updateInLocalStorage = false;
         this.setConfig(this.config);
-
         var self = this;
         var grid = new GridOverlay(lang.mixin({
           map: this.map,
@@ -154,62 +155,80 @@ define([
         this.colorPicker0.onChange = function (val) {
           setColorText(this.domNode, val);
           grid.setColor(0, val.toHex());
+          self._saveConfig();
         };
         this.colorPicker1.onChange = function (val) {
           setColorText(this.domNode, val);
           grid.setColor(1, val.toHex());
+          self._saveConfig();
         };
         this.colorPicker2.onChange = function (val) {
           setColorText(this.domNode, val);
           grid.setColor(2, val.toHex());
+          self._saveConfig();
         };
         this.colorPicker3.onChange = function (val) {
           setColorText(this.domNode, val);
           grid.setColor(3, val.toHex());
+          self._saveConfig();
         };
         this.colorPicker4.onChange = function (val) {
           setColorText(this.domNode, val);
           grid.setColor(4, val.toHex());
+          self._saveConfig();
         };
         this.colorPicker5.onChange = function (val) {
           setColorText(this.domNode, val);
           grid.setColor(5, val.toHex());
+          self._saveConfig();
         };
         this.fontSize0.onChange = function (val) {
           setDefaultFontSize(this, grid, 0, val);
+          self._saveConfig();
         };
         this.fontSize1.onChange = function (val) {
           setDefaultFontSize(this, grid, 1, val);
+          self._saveConfig();
         };
         this.fontSize2.onChange = function (val) {
           setDefaultFontSize(this, grid, 2, val);
+          self._saveConfig();
         };
         this.fontSize3.onChange = function (val) {
           setDefaultFontSize(this, grid, 3, val);
+          self._saveConfig();
         };
         this.fontSize4.onChange = function (val) {
           setDefaultFontSize(this, grid, 4, val);
+          self._saveConfig();
         };
         this.fontSize5.onChange = function (val) {
           setDefaultFontSize(this, grid, 5, val);
+          self._saveConfig();
         };
         this.lineSize0.onChange = function (val) {
           setDefaultLineWidth(this, grid, 0, val);
+          self._saveConfig();
         };
         this.lineSize1.onChange = function (val) {
           setDefaultLineWidth(this, grid, 1, val);
+          self._saveConfig();
         };
         this.lineSize2.onChange = function (val) {
           setDefaultLineWidth(this, grid, 2, val);
+          self._saveConfig();
         };
         this.lineSize3.onChange = function (val) {
           setDefaultLineWidth(this, grid, 3, val);
+          self._saveConfig();
         };
         this.lineSize4.onChange = function (val) {
           setDefaultLineWidth(this, grid, 4, val);
+          self._saveConfig();
         };
         this.lineSize5.onChange = function (val) {
           setDefaultLineWidth(this, grid, 5, val);
+          self._saveConfig();
         };
         this.verticalLabels.onclick = function () {
           self.verticalLabelsClicked = true;
@@ -256,8 +275,8 @@ define([
       },
 
       setConfig: function (origConfig) {
+        this.updateInLocalStorage = false;
         this.config = (origConfig !== undefined) ? origConfig : this._setConfig();
-
         this.minIntervalSpacing.set('value', this.config.minIntervalSpacing);
         this.minIntervalSpacingVal.innerHTML = (!window.isRTL) ?
           jimuUtils.sanitizeHTML(this.config.minIntervalSpacing + 'px') :
@@ -297,6 +316,9 @@ define([
         } else {
           this.cbxShowGrid.set('checked', false);
         }
+        setTimeout(lang.hitch(this, function () {
+          this.updateInLocalStorage = true;
+        }), 100);
       },
 
       getConfig: function () {
@@ -327,7 +349,10 @@ define([
       },
 
       _saveConfig: function () {
-        window.localStorage.setItem("storedGridSettings", JSON.stringify(this.getConfig()));
+        //update local storage settings when user changes any styles components
+        if (this.updateInLocalStorage) {
+          window.localStorage.setItem("storedGridSettings", JSON.stringify(this.getConfig()));
+        }
       },
 
       _setConfig: function () {
